@@ -1,0 +1,86 @@
+\documentclass{article}
+\begin{document}
+%\author{N1Ch@5}
+% this is first update to MUG of VI [Nov 10, 2010]
+\emph{from the \textbf{MUG of VIM}}\\[10pt]
+\section{File commands}
+\begin{tabular}{l l}
+\texttt{vim} \textsl{filename(s)} &	: edit a file(s) \\
+\texttt{vim -r} \textsl{filename} &	: retrive saved file from crash\\
+\texttt{vim -o} \textsl{file1} \textsl{file2} & : open two files horizontally\\
+\texttt{vim -O} \textsl{file1} \textsl{file2} & : open two files vertically\\
+\texttt{:split} \textsl{filename} & : insert file horizontally\\
+\texttt{:vsplit} \textsl{filename} & : insert file vertically\\
+\texttt{ZZ, :wq, :x}			&	: save \& exit\\
+\texttt{:q, :q!}				&	: quit; quit without saving\\
+\texttt{:w, :w} \textsl{fn} &		: save file, save file as \textsl{fn}\\
+\texttt{:e} \textsl{filename} & 	: edit \textsl{filename}\\
+\texttt{:r} \textsl{filename} & 	: insert \textsl{filename}\\
+\texttt{:sh} &					: drop to shell \\
+\texttt{:!} \textsl{cmd} & 		: run command \textsl{cmd}\\
+\texttt{:r!} \textsl{cmd} & 		: execute \textsl{cmd} and insert output\\
+\end{tabular}
+\section{Search and replace}
+\begin{tabular}{l l}
+\texttt{/}\textsl{txt}, \texttt{?}\textsl{txt} &	: find \textsl{txt} forward and backword\\
+\texttt{/\^}\textsl{txt}		&				: find next line that starts with \textsl{txt}\\
+\texttt{n, N} &								: repeat last search backward, forward\\
+\texttt{R} &						: replace text from current character\\
+\texttt{:\%s} \texttt{/}\textsl{txt}\texttt{/}\textsl{replacement-txt} & : replace the \textsl{txt} with \textsl{replacement-txt}\\
+&  (\texttt{\%s} denotes entire text in a file)\\
+\texttt{:1,25 s}\texttt{/}\textsl{txt}\texttt{/}\textsl{replacement-txt} &: replace only from line 1 to 25
+\end{tabular}
+\section{Deleting / Inserting text}
+\begin{tabular}{l l}
+\texttt{dw, dd, x} & 			: delete word, line character\\
+\textsl{n}\texttt{dd}, \textsl{n}\texttt{x} & 	: delete \textsl{n} lines, \textsl{n} characters\\
+\texttt{x, X}		&	: delete character forward, backward\\
+\texttt{D, d\$}	& : delete to end of line\\
+\texttt{d}\textsl{motion}	&	: delete from cursor to motion (\$, 0, etc)\\
+\texttt{:>, :<}	 &		: indent, outdent line\\
+\texttt{S}	& 	: replace text with blank line\\
+\texttt{o, O}	& 	: insert new line below, above current line\\
+\texttt{u} 	&		: undo last change\\
+\texttt{CTRL + r} & : redo\\
+\texttt{.}	&	: repeat last change\\
+\end{tabular}
+\section{Moving around}
+\begin{tabular}{l l}
+\textsl{n}\texttt{G} 	&	: move to line \textsl{n}\\
+\texttt{l, j, k, h}		&		: right, down, up, left one character\\
+\textsl{n}\texttt{b}, \textsl{n}\texttt{w}	&	: left or right \textsl{n} words\\
+\texttt{CTRL+B, F}	& 		: back, forward one screen\\
+\texttt{CTRL+U, D}	& 		: up, down one screen\\
+\texttt{\$, G} & 				: go to end of line, end of file\\
+\texttt{0}	&				: go to beginning of line(\texttt{zero})\\
+\texttt{), (} 	&				: move to next, previous sentence\\
+\texttt{\{, \}} 	&				: move to next, previous paragraph\\ 
+\texttt{w, b}   &				: move forward, back one word\\
+\texttt{e}		&			: go to the end of current or next word\\
+\texttt{CTRL+w+w}       &                       : moving between files \\
+& (press hold CTRL and press ``w'' till you reach the desired file) \\
+
+\end{tabular}
+\section{Cut / Copy / Paste}
+\begin{tabular}{l l}
+\textsl{n}\texttt{yy},  \textsl{n}\texttt{Y}	&			: copy \textsl{n} lines\\
+\texttt{yw}, \texttt{yy}	&								: copy word, line\\
+\texttt{p}, \texttt{P}		&							: paste text after, before cursor\\
+\texttt{a}, \texttt{i}		&							: insert text after, before cursor\\
+\texttt{A}, \texttt{I}		&							: insert text end, beginning of line\\
+\end{tabular}
+\section{Some cool stuff}
+\begin{tabular}{l l}
+\texttt{\~}		& 		: change case\\
+\texttt{xp}		& 		: transpose characters\\
+\texttt{J}		&		: combine current line with next\\
+\texttt{m}\textsl{p}	&		: create a mark called \textsl{p}\\	
+\texttt{`p}		& 	: return to \textsl{p}\\
+\texttt{d`x, y`x}		& 			: delete, copy text from mark to cursor\\
+\texttt{:>} \textsl{n}		&		: indent \textsl{n} lines\\
+\texttt{:undolist} & : list the changes made in a file\\
+\texttt{CTRL+n} & : autocompletion for a word already in a file\\
+\texttt{:2,5 !tr 'a-z' 'A-Z'} & : convert in to upper case from line 2 to 5\\
+\texttt{CTRL+w+o} & : only one window\\
+\end{tabular}
+\end{document}
