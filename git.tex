@@ -1,0 +1,223 @@
+% Created 2013-11-26 Tue 15:20
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{soul}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{minted}
+\providecommand{\alert}[1]{\textbf{#1}}
+
+\title{Using GIT}
+\author{sachin}
+\date{2013-11-26 Tue}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={GIT cheat-sheet},
+  pdfcreator={Emacs Org-mode version 7.9.3f}}
+
+\begin{document}
+
+\maketitle
+
+\setcounter{tocdepth}{3}
+\tableofcontents
+\vspace*{1cm}
+
+\section{Install}
+\label{sec-1}
+
+
+\begin{minted}[]{sh}
+sudo apt-get install/update git
+\end{minted}
+\section{Usage}
+\label{sec-2}
+\subsection{Elementary usage}
+\label{sec-2-1}
+
+    
+\begin{itemize}
+\item Create a directory
+
+\begin{minted}[]{sh}
+mkdir project1
+\end{minted}
+\item Initialize it as a git project 
+
+\begin{minted}[]{sh}
+git init
+\end{minted}
+\item Check the status of project
+
+\begin{minted}[]{sh}
+git status
+\end{minted}
+\item Add file(s) to \texttt{git}
+
+     Add single file.
+
+\begin{minted}[]{sh}
+git add <FILENAME>
+\end{minted}
+     
+     Add all files
+
+\begin{minted}[]{sh}
+git add .
+\end{minted}
+
+     Add all file in present directory
+
+\begin{minted}[]{sh}
+git add *
+\end{minted}
+\item Make \texttt{commit}
+     
+     With one line message
+
+\begin{minted}[]{sh}
+git commit -m "MESSAGE"
+\end{minted}
+
+     Open default text editor to write descriptive message.
+
+\begin{minted}[]{sh}
+git commit
+\end{minted}
+
+     Add and commit at the same time
+
+\begin{minted}[]{sh}
+git commit -am "MESSAGE"
+\end{minted}
+\item View logs(commits)
+
+\begin{minted}[]{sh}
+git log
+\end{minted}
+\item View \texttt{diff} between unstage file(s)
+
+     Entire \texttt{diff}
+
+\begin{minted}[]{sh}
+git diff
+\end{minted}
+
+     File specific \texttt{diff}
+
+\begin{minted}[]{sh}
+git diff <FILENAME>
+\end{minted}
+\item Show commit hash specific state of a file.
+
+\begin{minted}[]{sh}
+git show <COMMIT HASH>:<FILENAME>
+\end{minted}
+\item Reset to previous commit
+
+\begin{minted}[]{sh}
+git reset --hard <COMMIT HASH>
+\end{minted}
+\end{itemize}
+\subsection{Intermediate usage}
+\label{sec-2-2}
+
+\begin{itemize}
+\item Branching
+
+     Create branch
+
+\begin{minted}[]{sh}
+git branch <BRANCH NAME>
+\end{minted}
+
+     Delete branch
+
+\begin{minted}[]{sh}
+git branch -d <BRANCH NAME>
+\end{minted}
+
+     Change branch
+
+\begin{minted}[]{sh}
+git checkout <BRANCH NAME>
+\end{minted}
+
+     Merge branch
+
+\begin{minted}[]{sh}
+git merge <BRANCH NAME>
+\end{minted}
+\end{itemize}
+\subsection{Remotes}
+\label{sec-2-3}
+
+\begin{itemize}
+\item Manage git remotes
+
+      View remote host
+
+\begin{minted}[]{sh}
+git remote -v
+\end{minted}
+
+      Add remote
+
+\begin{minted}[]{sh}
+git remote add <REMOTE NAME> <REMOTE URL>
+\end{minted}
+      Example:
+
+\begin{minted}[]{sh}
+git remote add origin https://github.com/iitbaakash/project1.git
+\end{minted}
+    
+      Remove remote
+
+\begin{minted}[]{sh}
+git remote remove <REMOTE NAME>
+\end{minted}
+      Example
+
+\begin{minted}[]{sh}
+git remote remove origin
+\end{minted}
+\end{itemize}
+\subsection{Push/Pull}
+\label{sec-2-4}
+
+\begin{itemize}
+\item Manage push/pull
+
+      Push source for the first time
+
+\begin{minted}[]{sh}
+git push -u <REMOTE NAME> <BRANCH NAME>
+\end{minted}
+    
+      and then
+
+\begin{minted}[]{sh}
+git push
+\end{minted}
+
+      Pull source from remote(assuming that the remote is already been added)
+
+\begin{minted}[]{sh}
+git pull
+\end{minted}
+\end{itemize}
+    
+
+\end{document}

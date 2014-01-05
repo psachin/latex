@@ -1,0 +1,166 @@
+#+TITLE:     Using GIT
+#+AUTHOR:    sachin
+#+EMAIL:     iclcoolster@gmail.com
+#+DATE:      2013-11-26 Tue
+#+DESCRIPTION: GIT cheat-sheet
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:   
+#+LINK_HOME: 
+#+XSLT:
+
+** Install
+   #+BEGIN_SRC sh
+     sudo apt-get install/update git
+   #+END_SRC sh
+** Usage
+*** Elementary usage
+    
+   - Create a directory
+     #+BEGIN_SRC sh
+      mkdir project1
+     #+END_SRC sh
+
+   - Initialize it as a git project 
+    #+BEGIN_SRC sh
+     git init
+    #+END_SRC sh
+
+   - Check the status of project
+    #+BEGIN_SRC sh
+     git status
+    #+END_SRC sh
+
+   - Add file(s) to =git=
+
+     Add single file.
+     #+BEGIN_SRC sh
+       git add <FILENAME>
+     #+END_SRC sh
+     
+     Add all files
+     #+BEGIN_SRC sh
+       git add .
+     #+END_SRC sh
+
+     Add all file in present directory
+     #+BEGIN_SRC sh
+       git add *
+     #+END_SRC sh
+
+   - Make =commit=
+     
+     With one line message
+     #+BEGIN_SRC sh
+       git commit -m "MESSAGE"
+     #+END_SRC sh
+
+     Open default text editor to write descriptive message.
+     #+BEGIN_SRC sh
+       git commit
+     #+END_SRC sh
+
+     Add and commit at the same time
+     #+BEGIN_SRC sh
+       git commit -am "MESSAGE"
+     #+END_SRC sh
+
+   - View logs(commits)
+     #+BEGIN_SRC sh
+       git log
+     #+END_SRC sh
+
+   - View =diff= between unstage file(s)
+
+     Entire =diff=
+     #+BEGIN_SRC sh
+       git diff
+     #+END_SRC sh
+
+     File specific =diff=
+     #+BEGIN_SRC sh
+       git diff <FILENAME>
+     #+END_SRC sh
+
+   - Show commit hash specific state of a file.
+     #+BEGIN_SRC sh
+       git show <COMMIT HASH>:<FILENAME>
+     #+END_SRC sh
+
+   - Reset to previous commit
+     #+BEGIN_SRC sh
+      git reset --hard <COMMIT HASH>
+     #+END_SRC sh
+
+*** Intermediate usage
+   - Branching
+
+     Create branch
+     #+BEGIN_SRC sh
+       git branch <BRANCH NAME>
+     #+END_SRC sh
+
+     Delete branch
+     #+BEGIN_SRC sh
+      git branch -d <BRANCH NAME>
+     #+END_SRC sh
+
+     Change branch
+     #+BEGIN_SRC sh
+      git checkout <BRANCH NAME>
+     #+END_SRC sh
+
+     Merge branch
+     #+BEGIN_SRC sh
+       git merge <BRANCH NAME>
+     #+END_SRC sh
+
+*** Remotes
+    - Manage git remotes
+
+      View remote host
+      #+BEGIN_SRC sh
+        git remote -v
+      #+END_SRC sh
+
+      Add remote
+      #+BEGIN_SRC sh
+        git remote add <REMOTE NAME> <REMOTE URL>
+      #+END_SRC sh
+      Example:
+      #+BEGIN_SRC sh
+        git remote add origin https://github.com/iitbaakash/project1.git
+      #+END_SRC sh
+    
+      Remove remote
+      #+BEGIN_SRC sh
+        git remote remove <REMOTE NAME>
+      #+END_SRC sh
+      Example
+      #+BEGIN_SRC sh
+        git remote remove origin
+      #+END_SRC sh
+
+*** Push/Pull
+    - Manage push/pull
+
+      Push source for the first time
+      #+BEGIN_SRC sh
+        git push -u <REMOTE NAME> <BRANCH NAME>
+      #+END_SRC sh
+    
+      and then
+      #+BEGIN_SRC sh
+        git push
+      #+END_SRC sh
+
+      Pull source from remote(assuming that the remote is already been added)
+      #+BEGIN_SRC sh
+        git pull
+      #+END_SRC sh
+    
