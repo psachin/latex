@@ -1,0 +1,94 @@
+% Created 2014-01-05 Sun 17:26
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{soul}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{minted}
+\providecommand{\alert}[1]{\textbf{#1}}
+
+\title{nodejs and npm}
+\author{sachin}
+\date{2013-10-21 Mon}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs Org-mode version 7.9.3f}}
+
+\begin{document}
+
+\maketitle
+
+\setcounter{tocdepth}{3}
+\tableofcontents
+\vspace*{1cm}
+
+\section{nodejs}
+\label{sec-1}
+
+   
+
+\begin{minted}[]{sh}
+./configure --prefix ~/bin/nodejs
+make 
+make install
+\end{minted}
+
+   
+\section{npm}
+\label{sec-2}
+
+   
+
+\begin{minted}[]{sh}
+make 
+make install
+\end{minted}
+
+   it got installed in \texttt{\textasciitilde{}/lib} by default
+\section{for webRTCcopy}
+\label{sec-3}
+
+\begin{itemize}
+\item Clone
+
+\begin{minted}[]{sh}
+git clone https://github.com/erbbysam/webRTCCopy.git
+npm install ws express
+\end{minted}
+\item and then
+
+
+\begin{minted}[]{sh}
+node ~/server/site/server.js
+\end{minted}
+
+     (or use the forever node.js module to keep it running)
+\end{itemize}
+
+
+\begin{itemize}
+\item or for secure/wss: 
+       
+
+\begin{minted}[]{sh}
+node ~/server/site/server-secure.js
+\end{minted}
+
+     (or use the forever node.js module to keep it running)
+\end{itemize}
+
+   
+
+\end{document}

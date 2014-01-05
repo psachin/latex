@@ -1,0 +1,61 @@
+#+TITLE:     nodejs and npm
+#+AUTHOR:    sachin
+#+EMAIL:     iclcoolster@gmail.com
+#+DATE:      2013-10-21 Mon
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:   
+#+LINK_HOME: 
+#+XSLT:
+
+** nodejs
+   
+   #+BEGIN_SRC sh
+     ./configure --prefix ~/bin/nodejs
+     make 
+     make install
+   #+END_SRC sh
+
+   
+** npm
+   
+   #+BEGIN_SRC sh
+     make 
+     make install
+   #+END_SRC sh
+
+   it got installed in =~/lib= by default
+
+** for webRTCcopy
+   - Clone
+     #+BEGIN_SRC sh
+       git clone https://github.com/erbbysam/webRTCCopy.git
+       npm install ws express
+     #+END_SRC sh
+
+   - and then
+
+     #+BEGIN_SRC sh
+       node ~/server/site/server.js 
+     #+END_SRC sh
+
+     (or use the forever node.js module to keep it running)
+
+
+   - or for secure/wss: 
+       
+     #+BEGIN_SRC sh
+       node ~/server/site/server-secure.js 
+     #+END_SRC sh
+
+     (or use the forever node.js module to keep it running)
+
+   
+
+
