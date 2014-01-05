@@ -1,0 +1,219 @@
+#+TITLE:     Clojure
+#+AUTHOR:    sachin
+#+EMAIL:     iclcoolster@gmail.com
+#+DATE:      2013-09-26 Thu
+#+DESCRIPTION: introduction to Clojure
+#+KEYWORDS: clojure, emacs, repl
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:nil ltoc:t mouse:nil buttons:0 path:http://orgmode.org/org-info.js
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+LINK_UP:   
+#+LINK_HOME: 
+#+XSLT:
+
+** lein
+   - Download *lein* binary file from [[https://raw.github.com/technomancy/leiningen/stable/bin/lein][github]] and copy it to your
+     ~/bin/ directory.
+   - Add ~/bin PATH in your ~/.bashrc
+   - Make the binary executable
+   #+BEGIN_SRC sh
+     chmod a+x ~/bin/lein
+   #+END_SRC sh
+
+   - Now run the self installer
+     #+BEGIN_SRC sh
+       lein
+     #+END_SRC sh
+
+*** Lein configuration
+    - lein version 2 uses the idea of /profiles/. The location of file
+      is ~/.lein/profiles.clj
+
+    - sample profiles.clj file
+      #+BEGIN_SRC clojure -n
+       {:user {:plugins [[lein-difftest "1.3.8"]
+                         [lein-marginalia "0.7.1"]
+                         [lein-pprint "1.1.1"]
+                         [lein-swank "1.4.5"]
+                         [lein-exec "0.3.0"]
+                         [lein-ring "0.8.7"]]}}
+      #+END_SRC clojure
+*** Upgrade
+    - Upgrade lein to latest stable version using
+      #+BEGIN_SRC sh
+        lein upgrade
+      #+END_SRC sh
+
+
+** project/app
+*** create
+    - create a project using
+      #+BEGIN_SRC sh
+        lein new my-project
+      #+END_SRC sh
+
+    - create an app using
+      
+      #+BEGIN_SRC sh
+        lein new app my-stuff
+      #+END_SRC sh
+    
+    - create a noir project(=noir= is a plugin web framework)
+      #+BEGIN_SRC sh
+        lein new noir my-web-project
+      #+END_SRC sh
+
+*** REPL
+    - Go to your project directory and run =lein=
+      #+BEGIN_SRC sh
+      cd my-stuff
+      lein repl
+      #+END_SRC sh
+    
+    - inside =repl= prompt, run =(-main)=
+      #+BEGIN_SRC clojure
+      my-stuff.core=> (-main)
+      #+END_SRC clojure
+
+    - If you have done some change in a code, reload it
+      #+BEGIN_SRC clojure
+      my-stuff.core=> (require 'my-stuff.core :reload)
+      #+END_SRC clojure
+
+    - run a program using =lein=
+      #+BEGIN_SRC sh
+      lein run
+      #+END_SRC sh
+
+    - if you are happy with your app, package it into an executable
+      =jar=
+      #+BEGIN_SRC sh
+      lein uberjar
+      #+END_SRC sh
+
+    - and run =jar= file using
+      #+BEGIN_SRC sh
+      java -jar target/my-stuff-0.1.0-standalone.jar
+      #+END_SRC sh
+
+** library
+*** create
+    #+BEGIN_SRC sh
+    lein new default my-lib
+    #+END_SRC sh
+*** REPL
+    #+BEGIN_SRC sh
+    $ lein repl
+    ...
+    #+END_SRC sh
+    
+    #+BEGIN_SRC clojure
+    user=> (require 'my-lib.core)
+    nil
+    user=> (ns my-lib.core)
+    nil
+    my-lib.core=> (my-func 3)
+    9
+    #+END_SRC clojure
+
+** dependencies
+   - add project description to ~/.lein/profiles.clj or app/project.clj
+
+     #+BEGIN_SRC clojure -n
+       {:user {:plugins [[lein-difftest "1.3.8"]
+                         [lein-marginalia "0.7.1"]
+                         [lein-pprint "1.1.1"]
+                         [lein-swank "1.4.5"]
+                         [lein-exec "0.3.0"]
+                         [lein-ring "0.8.7"]]}}
+     #+END_SRC clojure
+
+   - or you can have it specific to the project
+     #+BEGIN_SRC clojure -n
+       (defproject perfect-clojure "0.1.0-SNAPSHOT"
+         :description "A simple clojure app to test my environment"
+         :url "http://clojuremadesimple.co.uk"
+         :license {:name "Eclipse Public License"
+                   :url "http://google.co.uk"}
+         :dependencies [[org.clojure/clojure "1.3.0"]]
+         :dev-dependencies [[midje "1.4.0"]
+                            [autodoc "0.9.0"]
+                           
+         :plugins [[lein-swank "1.4.4"]]]
+         )
+     #+END_SRC clojure
+
+   
+   - set or unset proxy and run
+     #+BEGIN_SRC sh
+       lein deps
+     #+END_SRC sh
+
+** compiling
+    - Build an executable =jar=
+      #+BEGIN_SRC sh
+        lein deps
+        lein uberjar
+      #+END_SRC sh
+    
+** running
+    #+BEGIN_SRC sh
+      java -jar target/my-stuff-0.1.0-SNAPSHOT-standalone.jar
+    #+END_SRC sh
+** connecting to REPL server
+   - A new REPL server is started at certain PORT when we invoke
+     #+BEGIN_SRC sh
+       lein repl
+     #+END_SRC sh
+
+   - We can connect to existing server using
+     #+BEGIN_SRC sh
+       lein repl :connect nrepl://localhost:PORT
+     #+END_SRC sh
+
+** generating docs from libraries
+   - install =marginalia=
+     #+BEGIN_SRC sh
+     cd ~/.lein
+     touch profiles.clj
+     #+END_SRC sh
+
+   - add following line to =profiles.clj= (=marginalia= version may be
+     different)
+     #+BEGIN_SRC clojure
+     {:user {:plugins [[lein-marginalia "0.7.1"]]}}
+     #+END_SRC clojure
+
+   - then, in your project 
+     #+BEGIN_SRC sh
+     cd /path/to/project/
+     #+END_SRC sh
+     
+   - generate docs
+     #+BEGIN_SRC sh
+     lein marg
+     #+END_SRC sh
+
+   - browse docs in path using web-browser
+     #+BEGIN_SRC sh
+     file://path/to/my-proj/docs/uberdoc.html
+     #+END_SRC sh
+
+** notes
+*** Difference between :use and :require
+    #+BEGIN_SRC clojure
+      (ns whatever
+        (:use [some.namespace :only [vars you want]]))
+    #+END_SRC clojure
+
+    #+BEGIN_SRC clojure
+      (ns whatever
+        (:require [some.namespace :as sn]))
+    #+END_SRC clojure
+
+** references
+   - http://www.unexpected-vortices.com/clojure/brief-beginners-guide/
+   - [[http://clojuremadesimple.co.uk/]]

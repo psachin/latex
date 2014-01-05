@@ -1,0 +1,302 @@
+% Created 2013-10-19 Sat 16:38
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{soul}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{latexsym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\usepackage{minted}
+\providecommand{\alert}[1]{\textbf{#1}}
+
+\title{Clojure}
+\author{sachin}
+\date{2013-09-26 Thu}
+\hypersetup{
+  pdfkeywords={clojure, emacs, repl},
+  pdfsubject={introduction to Clojure},
+  pdfcreator={Emacs Org-mode version 7.9.3f}}
+
+\begin{document}
+
+\maketitle
+
+\setcounter{tocdepth}{3}
+\tableofcontents
+\vspace*{1cm}
+
+\section{lein}
+\label{sec-1}
+
+\begin{itemize}
+\item Download \textbf{lein} binary file from \href{https://raw.github.com/technomancy/leiningen/stable/bin/lein}{github} and copy it to your
+     \~{}/bin/ directory.
+\item Add \~{}/bin PATH in your \~{}/.bashrc
+\item Make the binary executable
+\end{itemize}
+
+\begin{minted}[]{sh}
+chmod a+x ~/bin/lein
+\end{minted}
+
+\begin{itemize}
+\item Now run the self installer
+
+\begin{minted}[]{sh}
+lein
+\end{minted}
+\end{itemize}
+\subsection{Lein configuration}
+\label{sec-1-1}
+
+\begin{itemize}
+\item lein version 2 uses the idea of \emph{profiles}. The location of file
+      is \~{}/.lein/profiles.clj
+\item sample profiles.clj file
+
+\begin{minted}[]{clojure}
+1:  {:user {:plugins [[lein-difftest "1.3.8"]
+2:                    [lein-marginalia "0.7.1"]
+3:                    [lein-pprint "1.1.1"]
+4:                    [lein-swank "1.4.5"]
+5:                    [lein-exec "0.3.0"]
+6:                    [lein-ring "0.8.7"]]}}
+\end{minted}
+\end{itemize}
+\subsection{Upgrade}
+\label{sec-1-2}
+
+\begin{itemize}
+\item Upgrade lein to latest stable version using
+
+\begin{minted}[]{sh}
+lein upgrade
+\end{minted}
+\end{itemize}
+\section{project/app}
+\label{sec-2}
+\subsection{create}
+\label{sec-2-1}
+
+\begin{itemize}
+\item create a project using
+
+\begin{minted}[]{sh}
+lein new my-project
+\end{minted}
+\item create an app using
+      
+
+\begin{minted}[]{sh}
+lein new app my-stuff
+\end{minted}
+\item create a noir project(\texttt{noir} is a plugin web framework)
+
+\begin{minted}[]{sh}
+lein new noir my-web-project
+\end{minted}
+\end{itemize}
+\subsection{REPL}
+\label{sec-2-2}
+
+\begin{itemize}
+\item Go to your project directory and run \texttt{lein}
+
+\begin{minted}[]{sh}
+cd my-stuff
+lein repl
+\end{minted}
+\item inside \texttt{repl} prompt, run \texttt{(-main)}
+
+\begin{minted}[]{clojure}
+my-stuff.core=> (-main)
+\end{minted}
+\item If you have done some change in a code, reload it
+
+\begin{minted}[]{clojure}
+my-stuff.core=> (require 'my-stuff.core :reload)
+\end{minted}
+\item run a program using \texttt{lein}
+
+\begin{minted}[]{sh}
+lein run
+\end{minted}
+\item if you are happy with your app, package it into an executable
+      \texttt{jar}
+
+\begin{minted}[]{sh}
+lein uberjar
+\end{minted}
+\item and run \texttt{jar} file using
+
+\begin{minted}[]{sh}
+java -jar target/my-stuff-0.1.0-standalone.jar
+\end{minted}
+\end{itemize}
+\section{library}
+\label{sec-3}
+\subsection{create}
+\label{sec-3-1}
+
+
+\begin{minted}[]{sh}
+lein new default my-lib
+\end{minted}
+\subsection{REPL}
+\label{sec-3-2}
+
+
+\begin{minted}[]{sh}
+$ lein repl
+...
+\end{minted}
+    
+
+\begin{minted}[]{clojure}
+user=> (require 'my-lib.core)
+nil
+user=> (ns my-lib.core)
+nil
+my-lib.core=> (my-func 3)
+9
+\end{minted}
+\section{dependencies}
+\label{sec-4}
+
+\begin{itemize}
+\item add project description to \~{}/.lein/profiles.clj or app/project.clj
+
+
+\begin{minted}[]{clojure}
+1:  {:user {:plugins [[lein-difftest "1.3.8"]
+2:                    [lein-marginalia "0.7.1"]
+3:                    [lein-pprint "1.1.1"]
+4:                    [lein-swank "1.4.5"]
+5:                    [lein-exec "0.3.0"]
+6:                    [lein-ring "0.8.7"]]}}
+\end{minted}
+\item or you can have it specific to the project
+
+\begin{minted}[]{clojure}
+ 1:  (defproject perfect-clojure "0.1.0-SNAPSHOT"
+ 2:    :description "A simple clojure app to test my environment"
+ 3:    :url "http://clojuremadesimple.co.uk"
+ 4:    :license {:name "Eclipse Public License"
+ 5:              :url "http://google.co.uk"}
+ 6:    :dependencies [[org.clojure/clojure "1.3.0"]]
+ 7:    :dev-dependencies [[midje "1.4.0"]
+ 8:                       [autodoc "0.9.0"]
+ 9:  
+10:    :plugins [[lein-swank "1.4.4"]]]
+11:    )
+\end{minted}
+\end{itemize}
+
+   
+\begin{itemize}
+\item set or unset proxy and run
+
+\begin{minted}[]{sh}
+lein deps
+\end{minted}
+\end{itemize}
+\section{compiling}
+\label{sec-5}
+
+\begin{itemize}
+\item Build an executable \texttt{jar}
+
+\begin{minted}[]{sh}
+lein deps
+lein uberjar
+\end{minted}
+\end{itemize}
+    
+\section{running}
+\label{sec-6}
+
+
+\begin{minted}[]{sh}
+java -jar target/my-stuff-0.1.0-SNAPSHOT-standalone.jar
+\end{minted}
+\section{connecting to REPL server}
+\label{sec-7}
+
+\begin{itemize}
+\item A new REPL server is started at certain PORT when we invoke
+
+\begin{minted}[]{sh}
+lein repl
+\end{minted}
+\item We can connect to existing server using
+
+\begin{minted}[]{sh}
+lein repl :connect nrepl://localhost:PORT
+\end{minted}
+\end{itemize}
+\section{generating docs from libraries}
+\label{sec-8}
+
+\begin{itemize}
+\item install \texttt{marginalia}
+
+\begin{minted}[]{sh}
+cd ~/.lein
+touch profiles.clj
+\end{minted}
+\item add following line to \texttt{profiles.clj} (\texttt{marginalia} version may be
+     different)
+
+\begin{minted}[]{clojure}
+{:user {:plugins [[lein-marginalia "0.7.1"]]}}
+\end{minted}
+\item then, in your project 
+
+\begin{minted}[]{sh}
+cd /path/to/project/
+\end{minted}
+\item generate docs
+
+\begin{minted}[]{sh}
+lein marg
+\end{minted}
+\item browse docs in path using web-browser
+
+\begin{minted}[]{sh}
+file://path/to/my-proj/docs/uberdoc.html
+\end{minted}
+\end{itemize}
+\section{notes}
+\label{sec-9}
+\subsection{Difference between :use and :require}
+\label{sec-9-1}
+
+
+\begin{minted}[]{clojure}
+(ns whatever
+  (:use [some.namespace :only [vars you want]]))
+\end{minted}
+
+
+\begin{minted}[]{clojure}
+(ns whatever
+  (:require [some.namespace :as sn]))
+\end{minted}
+\section{references}
+\label{sec-10}
+
+\begin{itemize}
+\item \href{http://www.unexpected-vortices.com/clojure/brief-beginners-guide/}{http://www.unexpected-vortices.com/clojure/brief-beginners-guide/}
+\item \href{http://clojuremadesimple.co.uk/}{http://clojuremadesimple.co.uk/}
+\end{itemize}
+
+\end{document}
